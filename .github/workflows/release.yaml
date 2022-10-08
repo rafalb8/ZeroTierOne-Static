@@ -8,9 +8,27 @@ on:
     - '*'
 
 jobs:
-  push:
+  release:
     runs-on: ubuntu-latest
-    if: github.event_name == 'push'
+    steps:
+      - name: Create release
+        if: github.ref != 'refs/heads/master'
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: ${{ github.ref }}
+          draft: false
+          prerelease: true
+
+  build:
+    needs: [release]
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        arch: [ {platform: 'linux/amd64', name: 'x86_64'}, {platform: 'linux/arm64', name: 'aarch64'}]
 
     steps:
     - name: Checkout
@@ -19,45 +37,13 @@ jobs:
     - name: Set up QEMU
       uses: docker/setup-qemu-action@v1
 
-    - name: Build aarch64
-      run: make PLATFORM=linux/arm64 one
+    - name: Build ${{ matrix.arch.platform }}
+      run: make PLATFORM=${{ matrix.arch.platform }} one
 
-    - name: Build x86_64
-      run: make PLATFORM=linux/amd64 one
-
-    - name: Create release
-      if: github.ref != 'refs/heads/master'
-      id: create_release
-      uses: actions/create-release@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    - name: Release
+      uses: softprops/action-gh-release@v1
       with:
-        tag_name: ${{ github.ref }}
-        release_name: ${{ github.ref }}
-        draft: false
-        prerelease: true
+        files: ./out/zerotier-one-{{ matrix.arch.name }}.tar.gz
 
-    - name: Upload aarch64 archive
-      if: github.ref != 'refs/heads/master'
-      id: upload-aarch64-archive
-      uses: actions/upload-release-asset@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
-        asset_path: ./out/zerotier-one-aarch64.tar.gz
-        asset_name: zerotier-one-aarch64.tar.gz
-        asset_content_type: application/octet-stream
 
-    - name: Upload x86_64 archive
-      if: github.ref != 'refs/heads/master'
-      id: upload-x86_64-archive
-      uses: actions/upload-release-asset@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
-        asset_path: ./out/zerotier-one-x86_64.tar.gz
-        asset_name: zerotier-one-x86_64.tar.gz
-        asset_content_type: application/octet-stream
 

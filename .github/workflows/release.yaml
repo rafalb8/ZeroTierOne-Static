@@ -43,7 +43,7 @@ jobs:
     - name: Release
       uses: softprops/action-gh-release@v1
       with:
-        files: ./out/zerotier-one-{{ matrix.arch.name }}.tar.gz
+        files: ./out/zerotier-one-${{ matrix.arch.name }}.tar.gz
 
 
 

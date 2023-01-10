@@ -2,6 +2,7 @@
 This project provides static Zerotier-One binaries.
 
 # Installing
+*To install ZeroTier-One on Steam Deck you can follow: [Steam Deck (SteamOS 3)](SteamDeck.md)*
 
 Download latest release:
 ```sh
@@ -14,7 +15,6 @@ tar -xzf zerotier-one-x86_64.tar.gz
 install bin/* /bin
 ```
 # Building
-
 To build latest version run:
 ```sh
 make

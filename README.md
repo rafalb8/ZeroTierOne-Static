@@ -1,5 +1,5 @@
 # ZeroTier-One static binaries
-This project provides static Zerotier-One binaries.
+This project provides static [Zerotier-One](https://github.com/zerotier/ZeroTierOne) binaries.
 
 # Installing
 *To install ZeroTier-One on Steam Deck you can follow: [Steam Deck (SteamOS 3)](SteamDeck.md)*

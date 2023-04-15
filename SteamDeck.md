@@ -1,4 +1,14 @@
 # Steam Deck installation
+## Install script
+```sh
+# Set user password if not set
+passwd
+
+# Run script
+curl -s https://raw.githubusercontent.com/rafalb8/ZeroTierOne-Static/main/SteamDeck.sh | bash -s
+```
+
+## Manual
 ```sh
 # Create and enter zerotier data directory
 mkdir ~/.zerotier-one && cd ~/.zerotier-one

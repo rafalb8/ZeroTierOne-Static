@@ -1,11 +1,12 @@
 # Steam Deck installation
 ## Install script
+- Set user password if not set with
 ```sh
-# Set user password if not set
 passwd
-
-# Run script
-curl -s https://raw.githubusercontent.com/rafalb8/ZeroTierOne-Static/main/SteamDeck.sh | bash -s
+```
+ - Run script
+```sh
+bash <(curl -s https://raw.githubusercontent.com/rafalb8/ZeroTierOne-Static/main/SteamDeck.sh)
 ```
 
 ## Manual

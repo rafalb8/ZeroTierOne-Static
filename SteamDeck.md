@@ -42,7 +42,7 @@ cat <<EOF > ~/.config/systemd/user/zerotier-one.service
 After=network.target
 
 [Service]
-ExecStart=/usr/bin/sudo %h/.zerotier-one/zerotier-one %h/.zerotier-one
+ExecStart=/usr/bin/sudo %h/.zerotier-one/zerotier-one -U %h/.zerotier-one
 Restart=on-failure
 
 [Install]

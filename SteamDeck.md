@@ -54,3 +54,18 @@ EOF
 systemctl --user daemon-reload
 systemctl --user enable --now zerotier-one.service
 ```
+
+## Use CLI
+
+After the installation the cli can be used as following
+
+```
+cd ~/.zerotier-one
+sudo ./zerotier-cli -D/home/deck/.zerotier-one/ <command>
+```
+
+to see all commands use 
+
+```
+sudo ./zerotier-cli -D/home/deck/.zerotier-one/ -h
+```

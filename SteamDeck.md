@@ -42,7 +42,7 @@ cat <<EOF > ~/.config/systemd/user/zerotier-one.service
 After=network.target
 
 [Service]
-ExecStart=/usr/bin/sudo %h/.zerotier-one/zerotier-one %h/.zerotier-one
+ExecStart=/usr/bin/sudo %h/.zerotier-one/zerotier-one -U %h/.zerotier-one
 Restart=on-failure
 
 [Install]
@@ -53,4 +53,19 @@ EOF
 # Enable service
 systemctl --user daemon-reload
 systemctl --user enable --now zerotier-one.service
+```
+
+## Use CLI
+
+After the installation the cli can be used as following
+
+```
+cd ~/.zerotier-one
+sudo ./zerotier-cli -D/home/deck/.zerotier-one/ <command>
+```
+
+to see all commands use 
+
+```
+sudo ./zerotier-cli -D/home/deck/.zerotier-one/ -h
 ```

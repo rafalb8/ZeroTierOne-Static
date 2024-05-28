@@ -25,10 +25,10 @@ jobs:
       run: make PLATFORM=${{ matrix.arch.platform }} one
 
     - name: Release
-        uses: ncipollo/release-action@v1
-        with:
-          allowUpdates: true
-          artifacts: ./out/zerotier-one-${{ matrix.arch.name }}.tar.gz
+      uses: ncipollo/release-action@v1
+      with:
+        allowUpdates: true
+        artifacts: ./out/zerotier-one-${{ matrix.arch.name }}.tar.gz
 
 
 

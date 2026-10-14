@@ -4,6 +4,8 @@ This project provides static [Zerotier-One](https://github.com/zerotier/ZeroTier
 # Installing
 *To install ZeroTier-One on Steam Deck you can follow: [Steam Deck (SteamOS 3)](SteamDeck.md)*
 
+*For the Steam Frame, follow: [Steam Frame](SteamFrame.md)*
+
 Download latest release:
 ```sh
 curl -LJO https://github.com/rafalb8/ZeroTierOne-Static/releases/latest/download/zerotier-one-x86_64.tar.gz
